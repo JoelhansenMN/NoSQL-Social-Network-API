@@ -2,7 +2,7 @@ const { User, Thought } = require('../models');
 
 module.exports = {
 
-  // TODO: make sure the course records are associated with the corresponding student records
+  // get users
   async getUsers(req, res) {
     try {
       const users = await User.find()
