@@ -48,7 +48,7 @@ module.exports = {
       if (!user) {
         res.status(404).json({ message: 'No user with that ID' });
       }
-
+      res.json(user);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -58,7 +58,7 @@ module.exports = {
   async updateUser(req, res) {
     try {
       const user = await User.findOneAndUpdate(
-        { _id: req.params.usereId },
+        { _id: req.params.userId },
         { $set: req.body },
         { runValidators: true, new: true } 
       );
@@ -67,7 +67,7 @@ module.exports = {
         res.status(404).json({ message: 'No user with this id!' });
       }
 
-      res.json(course);
+      res.json(user);
     } catch (err) {
       res.status(500).json(err);
     }
