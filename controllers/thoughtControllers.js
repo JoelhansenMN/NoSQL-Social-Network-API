@@ -49,7 +49,7 @@ module.exports = {
   async updateThought(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
-        { _id: req.params.ThoughtId },
+        { _id: req.params.thoughtId },
         { $set: req.body },
         { runValidators: true, new: true } //allows mongoose to validate right before it updates the data base using what is listed in the models.  And in this instance its the course model 
       );
@@ -77,4 +77,42 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
+  async addReaction(req, res) {
+    try {
+      const reaction = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $addToSet: {reactions: req.body} },
+        { runValidators: true, new: true } 
+      );
+
+      if (!reaction) {
+        res.status(404).json({ message: 'No thought with this id!' });
+      }
+      return res.status(200).json(reaction)
+
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  async deleteReaction(req, res) {
+    try {
+      const reaction = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: {reactions: { _id: req.params.reactionId }}},
+        { runValidators: true, new: true } 
+      );
+
+      if (!reaction) {
+        res.status(404).json({ message: 'No thought with this id!' });
+      }
+      return res.status(200).json(reaction)
+
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
 };
+
