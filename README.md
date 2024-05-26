@@ -13,4 +13,4 @@ Since this application isn’t deployed, there is also a walkthrough video that 
   ## Links:
   [link to repo](https://github.com/JoelhansenMN/NoSQL-Social-Network-API)
 
-  [link to video]()
+  [link to video](https://drive.google.com/uc?id=1UK1sHotmZjx3YSbRhHgIQkk69hNbJxj4&export=download)
