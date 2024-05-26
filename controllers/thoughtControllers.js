@@ -46,6 +46,24 @@ module.exports = {
     }
   },
 
+  async updateThought(req, res) {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.ThoughtId },
+        { $set: req.body },
+        { runValidators: true, new: true } //allows mongoose to validate right before it updates the data base using what is listed in the models.  And in this instance its the course model 
+      );
+
+      if (!thought) {
+        res.status(404).json({ message: 'No thought with this id!' });
+      }
+
+      res.json(thought);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
   // Delete a delete a thought
   async deleteThought(req, res) {
     try {
